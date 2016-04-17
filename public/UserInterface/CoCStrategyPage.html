@@ -1,0 +1,84 @@
+<div ng-app="Main_App" class="CoCGuide" ng-controller="CoC_Controller" layout="column" ng-cloak>
+	<md-toolbar layout="row" class="navBar" md-scroll-shrink ng-if="true" >
+		
+		<span flex></span>
+		<md-button class="navBarSearchButton" ng-click="toggleLeft()" >
+			Begin Strategy Search
+		</md-button>
+
+		<span flex></span>
+		<md-button class="navBarButton" id="refreshButton" ng-click="refresh()" aria-label="refresh" style="width: 50px;">
+			<md-tooltip md-direction="left">Refresh Page</md-tooltip>                       
+			<md-icon md-svg-src="UserInterface/icon/refresh24white.svg"></md-icon>
+		</md-button>
+	</md-toolbar>
+
+	<md-sidenav class="md-sidenav-left" md-component-id="left">
+		<div class="CoCInput">	
+			<md-input-container>
+			<label>Town Hall Level</label>
+				<md-select ng-model="baseLevel">
+					<md-option ng-value="level" ng-repeat="level in baseLevels" ng-click="assignBase(level)">{{level}}</md-option>
+				</md-select>
+			</md-input-container>
+
+			<md-radio-group ng-model="active">
+				<md-radio-button value="'Attack'" ng-click="sort('Attack')">Attack</md-radio-button>
+				<md-radio-button value="'Defense'" ng-click="sort('Defense')">Defense</md-radio-button>
+			</md-radio-group>
+
+			<md-input-container>
+				<label>Options</label>
+				<md-select ng-model="baseOptions">
+					<md-option ng-value="item.name" ng-repeat="item in baseOptions" ng-click="assignStrategy(item.name)">{{item.name}}</md-option>
+				</md-select>
+			</md-input-container>
+
+			<md-button class="md-raised md-primary" aria-label="submit" ng-click="submit(); close();">Submit</md-button>
+		</div>
+	</md-sidenav>
+	<!-- <md-button class="md-raised md-primary" style="padding-top: 40px;" aria-label="submit" ng-click="submit(); close();">Submit</md-button> -->
+	
+	<table class="display" ng-cloak>
+	<tr>
+		<td class="CoCArticleColumn">
+			<md-content class="md-padding" style="height: 900px;">
+				<md-tabs md-selected="Directions" md-dynamic-height>
+					<md-tab ng-repeat="article in CoCArticles.items"
+					  label="{{article.title.split('/').pop()}}"
+					  ng-click="loadArticles(article.url, article.id)">
+					<br />
+					<!-- <md-tab-label>
+					<md-button class="md-icon-button" aria-label="TESTING" onclick="removeTab(article)">
+    					<md-icon md-svg-icon="/UserInterface/icon/remove18black.svg"></md-icon>
+						</md-button>
+					</md-tab-label> -->
+					<md-button class="md-fab md-warn" ng-click="removeTab(article)" aria-label="remove">
+						<md-icon style="padding-bottom: 40%;" md-svg-src="UserInterface/icon/trash36white.svg" aria-label="remove" onclick="removeTab(tab)"></md-icon>
+					</md-button>
+	
+					<div style="padding: 25px; text-align: center">
+						<div class="noHref" id = "{{article.id}}"  height="500px"></div>
+						<br/>
+					</div>
+					</md-tab>
+				</md-tabs>
+			</md-content>
+		</td>
+		<td class="YouTubeColumn">
+				<div layout="column" style="vertical-align: top; height: 900px;" >
+					<md-content class="md-padding">
+						<md-list md-border-bottom>
+					        <md-list-item class="md-3-line" ng-repeat="vid in youtubeVids" ng-click="null">
+					          <div class="md-list-item-text" layout="column" class="content">
+								<md-subheader class="md-no-sticky">{{vid.snippet.title}}</md-subheader>
+								<iframe ng-src="{{trustSrc(vid.id.videoId)}}" width="640" height="390"></iframe>
+							  </div>
+					        </md-list-item>
+				        </md-list>
+					</md-content>
+				</div>
+		</td>
+	</tr>
+	</table>
+</div>
