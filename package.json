@@ -20,10 +20,10 @@
     "test": "mocha --recursive -R nyan",
     "start": "node CoCServer.js"
   },
-  // "repository": {
-  //   "type": "git",
-  //   "url": "https://github.com/InternetProgrammingCS330/MadtermMashup.git"
-  // },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergeihanka/APIMashup.git"
+  },
   "author": "SergeiAndEvan",
   "license": "GNU",
   "bugs": {
