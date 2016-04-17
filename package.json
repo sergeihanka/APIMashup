@@ -9,7 +9,7 @@
     "path": "^0.12.7",
     "ejs": "^2.3.2",
     "cookie-parser": "~1.0.0",
-    "express-session": "~1.0.0",
+    "express-session": "~1.0.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",
